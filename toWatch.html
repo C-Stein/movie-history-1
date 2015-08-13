@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
@@ -11,18 +10,18 @@
   <body>
     <div class="container">
       <header>
-        <!--				Nav Bar       -->
+       <!--				Nav Bar       -->
         <nav>
 					<form class="navbar-form navbar-left" role="search">
 						<ul class="nav nav-pills navbar-fixed-top navbar-inverse">
 							<li><span class="glyphicon glyphicon-film" aria-hidden="true"></span></li>
-							<li role="presentation"><a href="index.html"><button type="submit" class="btn btn-default">Wishlist</button></a>
-							<li role="presentation" class="active "><a href="toWatch.html"><button type="submit" class="btn btn-default">Watched</button></a></li>
+							<li role="presentation" class="active "><a href="index.html"><button type="submit" class="btn btn-default">Wishlist</button></a>
+							<li role="presentation"><a href="toWatch.html"><button type="submit" class="btn btn-default">Watched</button></a></li>
 							<div class="leftNav">
 								<div class="form-group">
 									<input type="text" class="form-control" placeholder="Movie Title">
 								</div>
-								<button type="submit" class="btn btn-default searchMovies">Search</button>
+								<button type="submit" class="btn btn-default">Search</button>
 								<button type="submit" class="btn btn-default">Find</button>
 							</div>
 						</ul>
@@ -30,12 +29,13 @@
         </nav>
       </header>
       <main>
-     <!--  #movieDataPanel is used for handlebars-- don't change it! -->
-        <div class="" id="movieDataPanel">
+        <div class="col-md-12" id="movieDataPanel">
           <div class="media">
             <div class="media-left media-top">
+              
             </div>
             <div class="media-body">
+             
               <div class="media-bottom">
                 
               </div>
@@ -44,7 +44,7 @@
         </div>
       </main>
     </div>
-    <script data-main="javascripts/towatch" src="bower_components/requirejs/require.js"></script>
+    <script data-main="javascripts/main" src="bower_components/requirejs/require.js"></script>
   </body>
 
 </html>
