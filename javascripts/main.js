@@ -15,7 +15,8 @@ requirejs.config({
   }
 });
 
-requirejs(["jquery", "lodash", "firebase", "hbs", "bootstrap", "dom-access"], function($, _, _firebase, Handlebars, bootstrap, dom) {
+requirejs(["jquery", "lodash", "firebase", "hbs", "bootstrap", "dom-access"], 
+  function($, _, _firebase, Handlebars, bootstrap, dom) {
   var outputContainer = dom.getOutputElement();
   var myFirebaseRef = new Firebase("https://movie-database.firebaseio.com/");
   myFirebaseRef.child("movie").on("value", function(snapshot) {
@@ -40,3 +41,19 @@ requirejs(["jquery", "lodash", "firebase", "hbs", "bootstrap", "dom-access"], fu
       $(this).parent().parent().parent().remove();
   });
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -6,12 +6,16 @@ body {
   color: white; }
 
 .toWatchTemplate {
-  background-color: rgba(0, 0, 0, 0.5);
   padding: 10px;
   border-radius: 10px;
   box-shadow: 13px 13px 26px 6px rgba(0, 0, 0, 0.71);
   margin-bottom: 5%;
-  color: white; }
+  color: white;
+  display: inline;
+  border: 2px solid white; }
+
+.img-wrapper {
+  display: inline; }
 
 .watchedTemplate {
   background-color: rgba(0, 0, 0, 0.5);
