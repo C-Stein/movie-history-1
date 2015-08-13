@@ -17,8 +17,8 @@ requirejs.config({
 
 requirejs(["jquery", "lodash", "firebase", "hbs", "bootstrap", "dom-access"], function($, _, _firebase, Handlebars, bootstrap, dom) {
   var outputContainer = dom.getOutputElement();
-  var myFirebaseRef = new Firebase("https://movie-database.firebaseio.com/");
-  myFirebaseRef.child("movie").on("value", function(snapshot) {
+  var myFirebaseRef = new Firebase("https://moviehistoryrefactor.firebaseio.com/");
+  myFirebaseRef.child("movie").child("movie").on("value", function(snapshot) {
     var movies = snapshot.val();
     var storedMovieData = [];
     for (var obj in movies) {
@@ -34,7 +34,7 @@ requirejs(["jquery", "lodash", "firebase", "hbs", "bootstrap", "dom-access"], fu
   });
 
   function displayMovieData (movieArray) {
-    require(['hbs!../templates/movie-to-watch'], function(movieTemplate) {
+    require(['hbs!../templates/movie-watched'], function(movieTemplate) {
       outputContainer.html("");
       $(outputContainer).append(movieTemplate(movieArray));
     });
