@@ -1,13 +1,11 @@
 {{#each this}}
-  <div class="media toWatchTemplate">
-    <div class="media-left media-top">
-      <img class="media-object img-thumbnail" src="{{poster}}">
+  <div class="toWatchTemplate col-md-3">
+    <div class="img-wrapper">
+      <img class="img-thumbnail" src="{{poster}}">
     </div>
-    <div class="media-body">
-      <h3 class="media-heading">{{Title}}</h3>
-      <p>Release year: {{Year}}</p>
-      <p>{{Actors}}</p>
-      <div class="media-bottom">
+    <div class="">
+      <h3 class="">{{Title}}</h3>
+      <div class="">
         <button type="button" class="markWatched btn btn-default btn-sm">Mark Watched</button>
         <button type="button" class="removeButton btn btn-default btn-sm">Remove</button>
       </div>
