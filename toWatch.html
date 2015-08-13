@@ -11,13 +11,22 @@
   <body>
     <div class="container">
       <header>
+        <!--				Nav Bar       -->
         <nav>
-          <ul class="nav nav-pills navbar-fixed-top navbar-inverse">
-            <li><span class="glyphicon glyphicon-film" aria-hidden="true"></span></li>
-            <li role="presentation"><a href="index.html">Watched</a></li>
-            <li role="presentation" class="active"><a href="toWatch.html">To Watch</a></li>
-            <li role="presentation"><a href="addMovies.html">Add Movie</a></li>
-          </ul>
+					<form class="navbar-form navbar-left" role="search">
+						<ul class="nav nav-pills navbar-fixed-top navbar-inverse">
+							<li><span class="glyphicon glyphicon-film" aria-hidden="true"></span></li>
+							<li role="presentation"><a href="index.html"><button type="submit" class="btn btn-default">Wishlist</button></a>
+							<li role="presentation" class="active "><a href="toWatch.html"><button type="submit" class="btn btn-default">Watched</button></a></li>
+							<div class="leftNav">
+								<div class="form-group">
+									<input type="text" class="form-control" placeholder="Movie Title">
+								</div>
+								<button type="submit" class="btn btn-default searchMovies">Search</button>
+								<button type="submit" class="btn btn-default">Find</button>
+							</div>
+						</ul>
+					</form>
         </nav>
       </header>
       <main>
