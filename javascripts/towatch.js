@@ -5,17 +5,19 @@ requirejs.config({
     'hbs': '../bower_components/require-handlebars-plugin/hbs',
     'bootstrap': '../bower_components/bootstrap/dist/js/bootstrap.min',
     'firebase': '../bower_components/firebase/firebase',
-    'lodash': '../bower_components/lodash/lodash.min'
+    'lodash': '../bower_components/lodash/lodash.min',
+    'rating': '..bower_components/bootstrap-star-rating/js/star-rating.min'
   },
   shim: {
     'bootstrap': ['jquery'],
+    'rating': ['bootstrap'],
     'firebase': {
       exports: 'Firebase'
     }
   }
 });
 
-requirejs(["jquery", "lodash", "firebase", "hbs", "bootstrap", "dom-access"], function($, _, _firebase, Handlebars, bootstrap, dom) {
+requirejs(["jquery", "lodash", "firebase", "hbs", "bootstrap", "dom-access", "rating"], function($, _, _firebase, Handlebars, bootstrap, dom, rating) {
   var outputContainer = dom.getOutputElement();
   var myFirebaseRef = new Firebase("https://movie-database.firebaseio.com/");
   myFirebaseRef.child("movie").on("value", function(snapshot) {

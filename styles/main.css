@@ -14,8 +14,16 @@ body {
   display: inline;
   border: 2px solid white; }
 
-.img-wrapper {
-  display: inline; }
+.posterImage {
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  background-color: white;
+  padding: 4px; }
+
+.removeButton {
+  position: absolute;
+  bottom: 321px;
+  left: 190px; }
 
 .watchedTemplate {
   background-color: rgba(0, 0, 0, 0.5);

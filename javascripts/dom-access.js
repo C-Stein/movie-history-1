@@ -1,5 +1,5 @@
 define(["jquery"],function($) {
-  var $output = $("#movieDataPanel");
+  var $output = $(".modal-content");
 
   return {
     getOutputElement: function() {
