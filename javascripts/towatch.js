@@ -18,19 +18,21 @@ requirejs.config({
 requirejs(["jquery", "lodash", "firebase", "hbs", "bootstrap", "dom-access"], function($, _, _firebase, Handlebars, bootstrap, dom) {
   var outputContainer = dom.getOutputElement();
   var myFirebaseRef = new Firebase("https://moviehistoryrefactor.firebaseio.com/");
-  myFirebaseRef.child("movie").child("movie").on("value", function(snapshot) {
+  myFirebaseRef.child("movie").on("value", function(snapshot) {
     var movies = snapshot.val();
     var storedMovieData = [];
     for (var obj in movies) {
       storedMovieData.push(movies[obj]);
     }
+console.log("movies", movies);
 
-    var toWatchMovieData = _.filter(storedMovieData, { 'viewed': false });
+    var watchedMovieData = _.filter(storedMovieData, { 'viewed': true });
+    console.log("watchedMovieData", watchedMovieData);
 
 
 
 
-    displayMovieData(toWatchMovieData);
+    displayMovieData(watchedMovieData);
   });
 
   function displayMovieData (movieArray) {
@@ -39,8 +41,5 @@ requirejs(["jquery", "lodash", "firebase", "hbs", "bootstrap", "dom-access"], fu
       $(outputContainer).append(movieTemplate(movieArray));
     });
   }
-  $(document).on("click", ".removeButton", function () {
-    $(this).parent().parent().parent().remove();
-  });
 
 });

@@ -23,6 +23,8 @@ requirejs(["jquery", "lodash", "firebase", "hbs", "bootstrap", "dom-access", "de
     var movies = snapshot.val();
     console.log("movies", movies);
     var storedMovieData = [];
+		var poster;
+
     
     for (var obj in movies) {
       storedMovieData.push(movies[obj]);
@@ -37,8 +39,9 @@ requirejs(["jquery", "lodash", "firebase", "hbs", "bootstrap", "dom-access", "de
     console.log('movieHash', movieHash);
       deleteButton.delete(movieHash);
   });
-    var watchedMovieData = _.filter(storedMovieData, { 'viewed': true });
-    displayMovieData(watchedMovieData);
+    var toWatchMovieData = _.filter(storedMovieData, { 'viewed': false });
+    console.log("to WatchMovieData", toWatchMovieData);
+    displayMovieData(toWatchMovieData);
   });
 
   function displayMovieData (movieArray) {
@@ -48,48 +51,55 @@ requirejs(["jquery", "lodash", "firebase", "hbs", "bootstrap", "dom-access", "de
     });
   }
 
-
-    function getMovie(title) {
+  //   function to pull movie from OMDB   //
+  function getMovie(title) {
     console.log("trying to get movie");
     $.ajax({
       url: "http://www.omdbapi.com/?",
       data: {
-        t: title,
+        s: title,
       },
     success: function(data) {
-      console.log("Movie", data);
-      var yearRel = $("#year").val(data.Year);
-      var actors = $("#actors").val(data.Actors);
-      var poster = data.Poster;
-      
-      }
-    });
-  }
+      console.log("Movie", data.Search[0].Title);
+			
+//      poster = data.Poster;
+//      $("#poster").html("<img src='" + data.Poster + "' height=100>");
+			
+		for (var i = 0; i <= data.length; i++) {
+			console.log("Movie Names", data.Search[i].Title);
+		}
+   }
+  });
+	}
+		
+		// Add movie to firebase
+	
+	$(".addMovies").click(function(){
+		
+		// Created var for movie
+				var newMovie = {
+					"Title": $("#movieTitle").val(),
+          "Poster": $("#poster").html(),
+					};
+		});
   
+		// Search movies in firebase  ---- Not functioning yet
   $(document).on('click', '#searchButton', function(){
     console.log("search button clicked");
-    var title = $("#searchBox").val();
-    getMovie(title);
+		var title = $("#searchBox").val();
+    
   });
 
-
-
-
+	// Search API for Movie Titles -- calls getMovie function//
+	$(".findBtn").click(function(){
+		console.log("click");
+		var title = $("#searchBox").val();
+			console.log("title", title);
+		
+		getMovie(title);
+		
 
 });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+});
