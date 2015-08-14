@@ -5,18 +5,20 @@ requirejs.config({
     'hbs': '../bower_components/require-handlebars-plugin/hbs',
     'bootstrap': '../bower_components/bootstrap/dist/js/bootstrap.min',
     'firebase': '../bower_components/firebase/firebase',
-    'lodash': '../bower_components/lodash/lodash.min'
+    'lodash': '../bower_components/lodash/lodash.min',
+    'bootstrap-rating': '../bower_components/bootstrap-rating/bootstrap-rating.min'
   },
   shim: {
     'bootstrap': ['jquery'],
+    'bootstrap-rating': ['bootstrap'],
     'firebase': {
       exports: 'Firebase'
     }
   }
 });
 
-requirejs(["jquery", "lodash", "firebase", "hbs", "bootstrap", "dom-access", "deleteButton"], 
-  function($, _, _firebase, Handlebars, bootstrap, dom, deleteButton) {
+requirejs(["jquery", "lodash", "firebase", "hbs", "bootstrap", "bootstrap-rating", "dom-access", "deleteButton"], 
+  function($, _, _firebase, Handlebars, bootstrap, bootrate, dom, deleteButton) {
   var outputContainer = dom.getOutputElement();
   var myFirebaseRef = new Firebase("https://moviehistoryrefactor.firebaseio.com/");
   myFirebaseRef.child("movie").on("value", function(snapshot) {
@@ -65,13 +67,24 @@ requirejs(["jquery", "lodash", "firebase", "hbs", "bootstrap", "dom-access", "de
 //      poster = data.Poster;
 //      $("#poster").html("<img src='" + data.Poster + "' height=100>");
 			
-		for (var i = 0; i <= data.length; i++) {
+		for (var i = 0; i <= data.Search.length; i++) {
 			console.log("Movie Names", data.Search[i].Title);
 		}
    }
   });
 	}
-		
+		//Star Rating of Movie
+    $('rating').rating({
+      extendSymbol: function (rate) {
+        $(this).tooltip({
+          container: 'body',
+          placement: 'bottom',
+          title: 'Rate ' + rate
+        });
+      }
+    });
+
+
 		// Add movie to firebase
 	
 	$(".addMovies").click(function(){
