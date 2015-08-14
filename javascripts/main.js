@@ -15,8 +15,9 @@ requirejs.config({
   }
 });
 
-requirejs(["jquery", "lodash", "firebase", "hbs", "bootstrap", "dom-access", "deleteButton"], 
-  function($, _, _firebase, Handlebars, bootstrap, dom, deleteButton) {
+requirejs(["jquery", "lodash", "firebase", "hbs", "bootstrap", "dom-access", "deleteButton", "searchFunctions", "getPosters"], 
+  function($, _, _firebase, Handlebars, bootstrap, dom, deleteButton, search, posters) {
+  var searchResults;
   var outputContainer = dom.getOutputElement();
   var myFirebaseRef = new Firebase("https://moviehistoryrefactor.firebaseio.com/");
   myFirebaseRef.child("movie").on("value", function(snapshot) {
@@ -51,24 +52,10 @@ requirejs(["jquery", "lodash", "firebase", "hbs", "bootstrap", "dom-access", "de
     });
   }
 
-  //   function to pull movie from OMDB   //
-  function getMovie(title) {
-    console.log("trying to get movie");
-    $.ajax({
-      url: "http://www.omdbapi.com/?",
-      data: {
-        s: title,
-      },
-    success: function(data) {
-      console.log("Movie", data);
-			
-		for (var i = 0; i < data.Search.length; i++) {
-			console.log("Movie Names", data.Search[i].Title);
-		}
-   }
-  });
-	}
-		
+
+
+
+
 		// Add movie to firebase
 	
 	$(".addMovies").click(function(){
@@ -94,23 +81,41 @@ requirejs(["jquery", "lodash", "firebase", "hbs", "bootstrap", "dom-access", "de
 		});
 	});
   
-		// Search movies in firebase  ---- Not functioning yet
-  $(document).on('click', '#searchButton', function(){
-    console.log("search button clicked");
-		var title = $("#searchBox").val();
-    
-  });
 
-	// Search API for Movie Titles -- calls getMovie function//
-	$(".findBtn").click(function(){
-		console.log("click");
+	// Search API and firebase for Movie Titles -- calls getMovie function//
+	$("#searchButton").click(function(){
+		console.log("search button clicked");
+    
+    //search api for multiple results
 		var title = $("#searchBox").val();
 			console.log("title", title);
 		
-		getMovie(title);
-		
+		var searchResults;
+    function getMovie(title) {
+      console.log("trying to get movie");
+      $.ajax({
+        url: "http://www.omdbapi.com/?",
+        data: {
+          s: title,
+        },
+        success: function(data) {
+          
+          console.log("data from getMovie function", data);
+          searchResults = data;
+          console.log("searchResults from getMain", searchResults);
+          posters.getPosters(searchResults.Search);
+        } 
+      });
+    }
+    getMovie(title);
+  console.log("searchResults from main", searchResults);
 
-});
+    //re-search api to get posters for original results
+
+    //search firebase
+
+
+  });
 
 
 });
