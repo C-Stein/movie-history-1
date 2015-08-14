@@ -43,12 +43,28 @@ requirejs(["jquery", "lodash", "firebase", "hbs", "bootstrap", "searchMovieData"
        console.log(movieObj);
        console.log("data", movies);
        $.ajax({
-         url: "https://movie-database.firebaseio.com/movie.json",
+         url: "https://moviehistoryrefsctor.firebaseio.com/movie.json",
          method: "POST",
          data: JSON.stringify(movieObj)
        }).done(function(movieObj) {
          console.log(movieObj);
        });
      });
- });
+  });
+
+
+
 });
+
+
+
+
+
+
+
+
+
+
+
+
+

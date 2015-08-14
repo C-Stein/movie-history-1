@@ -15,18 +15,28 @@ requirejs.config({
   }
 });
 
-requirejs(["jquery", "lodash", "firebase", "hbs", "bootstrap", "dom-access"], 
-  function($, _, _firebase, Handlebars, bootstrap, dom) {
+requirejs(["jquery", "lodash", "firebase", "hbs", "bootstrap", "dom-access", "deleteButton"], 
+  function($, _, _firebase, Handlebars, bootstrap, dom, deleteButton) {
   var outputContainer = dom.getOutputElement();
   var myFirebaseRef = new Firebase("https://moviehistoryrefactor.firebaseio.com/");
-  myFirebaseRef.child("movie").child("movie").on("value", function(snapshot) {
+  myFirebaseRef.child("movie").on("value", function(snapshot) {
     var movies = snapshot.val();
+    console.log("movies", movies);
     var storedMovieData = [];
-    console.log(storedMovieData);
     
     for (var obj in movies) {
       storedMovieData.push(movies[obj]);
     }
+    console.log("storedMovieData", storedMovieData);
+  $(document).on("click", ".removeButton", function () {
+    var deleteTitle = $(this).siblings('h2').text();
+    console.log("deleteTitle", deleteTitle);
+    var movieHash = _.findKey(movies, {'title': deleteTitle});
+    console.log('movies', movies);
+    
+    console.log('movieHash', movieHash);
+      deleteButton.delete(movieHash);
+  });
     var watchedMovieData = _.filter(storedMovieData, { 'viewed': true });
     displayMovieData(watchedMovieData);
   });
@@ -38,9 +48,34 @@ requirejs(["jquery", "lodash", "firebase", "hbs", "bootstrap", "dom-access"],
     });
   }
 
-  $(document).on("click", ".removeButton", function () {
-      $(this).parent().parent().parent().remove();
+
+    function getMovie(title) {
+    console.log("trying to get movie");
+    $.ajax({
+      url: "http://www.omdbapi.com/?",
+      data: {
+        t: title,
+      },
+    success: function(data) {
+      console.log("Movie", data);
+      var yearRel = $("#year").val(data.Year);
+      var actors = $("#actors").val(data.Actors);
+      var poster = data.Poster;
+      
+      }
+    });
+  }
+  
+  $(document).on('click', '#searchButton', function(){
+    console.log("search button clicked");
+    var title = $("#searchBox").val();
+    getMovie(title);
   });
+
+
+
+
+
 });
 
 
