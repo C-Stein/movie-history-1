@@ -37,8 +37,9 @@ requirejs(["jquery", "lodash", "firebase", "hbs", "bootstrap", "dom-access", "de
     console.log('movieHash', movieHash);
       deleteButton.delete(movieHash);
   });
-    var watchedMovieData = _.filter(storedMovieData, { 'viewed': true });
-    displayMovieData(watchedMovieData);
+    var toWatchMovieData = _.filter(storedMovieData, { 'viewed': false });
+    console.log("to WatchMovieData", toWatchMovieData);
+    displayMovieData(toWatchMovieData);
   });
 
   function displayMovieData (movieArray) {
