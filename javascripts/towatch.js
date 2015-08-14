@@ -24,7 +24,8 @@ requirejs(["jquery", "lodash", "firebase", "hbs", "bootstrap", "dom-access"], fu
     for (var obj in movies) {
       storedMovieData.push(movies[obj]);
     }
-console.log("movies", movies);
+
+    console.log("movies", movies);
 
     var watchedMovieData = _.filter(storedMovieData, { 'viewed': true });
     console.log("watchedMovieData", watchedMovieData);
