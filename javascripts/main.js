@@ -60,12 +60,9 @@ requirejs(["jquery", "lodash", "firebase", "hbs", "bootstrap", "dom-access", "de
         s: title,
       },
     success: function(data) {
-      console.log("Movie", data.Search[0].Title);
+      console.log("Movie", data);
 			
-//      poster = data.Poster;
-//      $("#poster").html("<img src='" + data.Poster + "' height=100>");
-			
-		for (var i = 0; i <= data.length; i++) {
+		for (var i = 0; i < data.Search.length; i++) {
 			console.log("Movie Names", data.Search[i].Title);
 		}
    }
@@ -76,12 +73,26 @@ requirejs(["jquery", "lodash", "firebase", "hbs", "bootstrap", "dom-access", "de
 	
 	$(".addMovies").click(function(){
 		
-		// Created var for movie
-				var newMovie = {
-					"Title": $("#movieTitle").val(),
-          "Poster": $("#poster").html(),
-					};
+		$.ajax({
+      url: "http://www.omdbapi.com/?",
+      data: {
+        t: title,
+      },
+    success: function(data) {
+      console.log("Movie", data);
+			
+			
+			//  Not sure how to take this information and put it into the modal
+			
+			
+//			poster = data.Poster;
+//      $("#poster").html("<img src='" + data.Poster + "' height=100>");
+				var movTitle = $("#title").val(data.Search[i].Title);
+				var yearRel = $("#year").val(data.Search[i].Year);
+		
+		}
 		});
+	});
   
 		// Search movies in firebase  ---- Not functioning yet
   $(document).on('click', '#searchButton', function(){
