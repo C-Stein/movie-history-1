@@ -3,40 +3,48 @@ body {
   background-image: url("../images/filmWallpaper.jpg");
   background-size: cover;
   background-repeat: no-repeat;
-  color: white; }
+  color: white;
+}
 
 .toWatchTemplate {
   padding: 10px;
   border-radius: 10px;
-  box-shadow: 13px 13px 26px 6px rgba(0, 0, 0, 0.71);
+  box-shadow: 13px 13px 26px 6px rgba(0,0,0,0.71);
   margin-bottom: 5%;
   color: white;
   display: inline;
-  border: 2px solid white; }
+  border: 2px solid white;
+}
 
 .posterImage {
   border-radius: 4px;
   border: 1px solid #ddd;
   background-color: white;
-  padding: 4px; }
+  padding: 4px;
+
+}
 
 .removeButton {
   position: absolute;
   bottom: 321px;
-  left: 190px; }
+  left: 190px;
+}
 
 .watchedTemplate {
   background-color: rgba(0, 0, 0, 0.5);
   padding: 10px;
   border-radius: 10px;
-  box-shadow: 13px 13px 26px 6px rgba(0, 0, 0, 0.71);
+  box-shadow: 13px 13px 26px 6px rgba(0,0,0,0.71);
   margin-bottom: 5%;
-  color: white; }
+  color: white;
+}
 
 #submitMovie {
-  color: black; }
+  color: black;
+}
+
+//********** Nav Bar CSS *********//
 
 .leftNav {
-  float: right; }
-
-/*# sourceMappingURL=main.css.map */
+	float: right;
+}
