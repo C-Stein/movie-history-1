@@ -1,13 +1,17 @@
 {{#each this}}
-  <div class="watchedTemplate col-md-3">
+  <div class="toWatchTemplate col-md-3">
     <div class="img-wrapper">
-      <img class="media-object img-thumbnail" src="{{{poster}}}">
+      <img class="posterImage" src="{{{poster}}}" width=214 height=310>
     </div>
-    <div class="media-body">
+    
+    
+    <div class="watchedMovie">
+      <h2 class="hidden">{{title}}</h2>
+
       <p>{{rating}}</p>
-      <div class="media-bottom">
-        <button type="button" class="removeButton btn btn-default btn-sm">Remove</button>
-      </div>
+        <input type="hidden" class="rating"/>
     </div>
   </div>
 {{/each}}
+
+
