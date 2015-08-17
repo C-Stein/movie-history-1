@@ -51,7 +51,7 @@ requirejs(["jquery", "lodash", "firebase", "hbs", "bootstrap", "dom-access", "ra
           var rate = $(this).closest('.rating').rating('rate');
             console.log(rate);
           //variable to get title/key
-          var ratingTitle = $(this).parent('rate').html();
+          var ratingTitle = $(this).attr('title');
             console.log(ratingTitle);
           var titleKey = _.findKey(movies, {'Title': ratingTitle});
             console.log(titleKey);
