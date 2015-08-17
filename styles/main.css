@@ -12,7 +12,7 @@ body {
   margin-bottom: 5%;
   color: white;
   display: inline;
-  border: 2px solid white; }
+  border: 2px solid orange; }
 
 .posterImage {
   border-radius: 4px;
@@ -31,7 +31,17 @@ body {
   border-radius: 10px;
   box-shadow: 13px 13px 26px 6px rgba(0, 0, 0, 0.71);
   margin-bottom: 5%;
-  color: white; }
+  color: white;
+  border: 2px solid green; }
+
+.searchedMoviesTemplate {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 13px 13px 26px 6px rgba(0, 0, 0, 0.71);
+  margin-bottom: 5%;
+  color: white;
+  border: 2px solid red; }
 
 #submitMovie {
   color: black; }
