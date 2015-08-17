@@ -1,5 +1,12 @@
-define(["jquery"],function($) {
+define(["jquery", "main"],function($, main) {
+    function displaySearchedMovieData(movieArray) {
+      require(['hbs!../templates/searchedMovies'], function(movieTemplate) {
+      $("#movieDataPanel").html("");
+      $("#movieDataPanel").prepend(movieTemplate(movieArray));
+      });
+    }
   return {
+
 
   //function to get posters for movies returned in "getMovie" function
 
@@ -7,47 +14,13 @@ define(["jquery"],function($) {
       console.log("trying to get posters");
         var imdbIDArray =  [];
         for (var i = 0; i < searchArray.length; i++) {
-          imdbIDArray.push(searchArray[i].imdbID);
+          imdbIDArray.push({imdbID: "http://img.omdbapi.com/?i=" + searchArray[i].imdbID + "&apikey=44da9985"});
         }
-        console.log("imdbArray: ", imdbIDArray);
-        
-        var imdbID = imdbIDArray[0]
-          
-            $.ajax({
-              url: "http://www.omdbapi.com/?",
-              data: {
-                i: imdbID,
-              },
-              success: function(data) {
-                console.log("poster data??", data.Poster);
-              } 
-            });
+        console.log("imdbIDArray: ", imdbIDArray);
+        displaySearchedMovieData(imdbIDArray);
 
-        imdbID = imdbIDArray[1]
-          
-            $.ajax({
-              url: "http://www.omdbapi.com/?",
-              data: {
-                i: imdbID,
-              },
-              success: function(data) {
-                console.log("poster data??", data.Poster);
-              } 
-            });
-        imdbID = imdbIDArray[2]
-          
-            $.ajax({
-              url: "http://www.omdbapi.com/?",
-              data: {
-                i: imdbID,
-              },
-              success: function(data) {
-                console.log("poster data??", data.Poster);
-              } 
-            });
-
-          
+    }      
         
-    }
-  };
+    };
 });
+

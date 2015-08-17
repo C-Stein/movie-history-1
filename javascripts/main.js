@@ -42,15 +42,16 @@ requirejs(["jquery", "lodash", "firebase", "hbs", "bootstrap", "dom-access", "de
   });
     var toWatchMovieData = _.filter(storedMovieData, { 'viewed': false });
     console.log("to WatchMovieData", toWatchMovieData);
-    displayMovieData(toWatchMovieData);
+    displayWishlistMovieData(toWatchMovieData);
   });
 
-  function displayMovieData (movieArray) {
+  function displayWishlistMovieData (movieArray) {
     require(['hbs!../templates/movie-to-watch'], function(movieTemplate) {
       outputContainer.html("");
       $(outputContainer).prepend(movieTemplate(movieArray));
     });
   }
+
 
 
 
@@ -103,12 +104,13 @@ requirejs(["jquery", "lodash", "firebase", "hbs", "bootstrap", "dom-access", "de
           console.log("data from getMovie function", data);
           searchResults = data;
           console.log("searchResults from getMain", searchResults);
-          posters.getPosters(searchResults.Search);
+         posters.getPosters(searchResults.Search);
         } 
       });
     }
     getMovie(title);
-  console.log("searchResults from main", searchResults);
+  console.log("imdb Array?", searchResults);
+  
 
     //re-search api to get posters for original results
 
