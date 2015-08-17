@@ -11,7 +11,7 @@ define(["jquery"],function($) {
         }
         console.log("imdbArray: ", imdbIDArray);
         
-        var imdbID = imdbIDArray[0]
+        var imdbID = imdbIDArray[0];
           
             $.ajax({
               url: "http://www.omdbapi.com/?",
@@ -23,7 +23,7 @@ define(["jquery"],function($) {
               } 
             });
 
-        imdbID = imdbIDArray[1]
+        imdbID = imdbIDArray[1];
           
             $.ajax({
               url: "http://www.omdbapi.com/?",
@@ -34,7 +34,7 @@ define(["jquery"],function($) {
                 console.log("poster data??", data.Poster);
               } 
             });
-        imdbID = imdbIDArray[2]
+        imdbID = imdbIDArray[2];
           
             $.ajax({
               url: "http://www.omdbapi.com/?",

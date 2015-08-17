@@ -5,18 +5,20 @@ requirejs.config({
     'hbs': '../bower_components/require-handlebars-plugin/hbs',
     'bootstrap': '../bower_components/bootstrap/dist/js/bootstrap.min',
     'firebase': '../bower_components/firebase/firebase',
-    'lodash': '../bower_components/lodash/lodash.min'
+    'lodash': '../bower_components/lodash/lodash.min',
+    'rating2': '../bower_components/bootstrap-rating/bootstrap-rating.min'
   },
   shim: {
     'bootstrap': ['jquery'],
+    'rating2': ['bootstrap'],
     'firebase': {
       exports: 'Firebase'
     }
   }
 });
 
-requirejs(["jquery", "lodash", "firebase", "hbs", "bootstrap", "dom-access", "deleteButton", "searchFunctions", "getPosters"], 
-  function($, _, _firebase, Handlebars, bootstrap, dom, deleteButton, search, posters) {
+requirejs(["jquery", "lodash", "firebase", "hbs", "bootstrap", "dom-access", "deleteButton", "searchFunctions", "getPosters", "rating2"], 
+  function($, _, _firebase, Handlebars, bootstrap, dom, deleteButton, search, posters, rating2) {
   var searchResults;
   var outputContainer = dom.getOutputElement();
   var myFirebaseRef = new Firebase("https://moviehistoryrefactor.firebaseio.com/");
@@ -42,20 +44,20 @@ requirejs(["jquery", "lodash", "firebase", "hbs", "bootstrap", "dom-access", "de
   });
     var toWatchMovieData = _.filter(storedMovieData, { 'viewed': false });
     console.log("to WatchMovieData", toWatchMovieData);
-    displayMovieData(toWatchMovieData);
+    displayMovieData(toWatchMovieData, movies);
   });
 
-  function displayMovieData (movieArray) {
+  function displayMovieData (movieArray, movies) {
     require(['hbs!../templates/movie-to-watch'], function(movieTemplate) {
       outputContainer.html("");
       $(outputContainer).prepend(movieTemplate(movieArray));
+
     });
+
+
   }
 
-
-
-
-
+  
 		// Add movie to firebase
 	
 	$(".addMovies").click(function(){
@@ -76,6 +78,7 @@ requirejs(["jquery", "lodash", "firebase", "hbs", "bootstrap", "dom-access", "de
 //      $("#poster").html("<img src='" + data.Poster + "' height=100>");
 				var movTitle = $("#title").val(data.Search[i].Title);
 				var yearRel = $("#year").val(data.Search[i].Year);
+
 		
 		}
 		});
@@ -116,6 +119,9 @@ requirejs(["jquery", "lodash", "firebase", "hbs", "bootstrap", "dom-access", "de
 
 
   });
+
+  
+
 
 
 });
