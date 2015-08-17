@@ -1,10 +1,13 @@
 define(["jquery", "main"],function($, main) {
+    
     function displaySearchedMovieData(movieArray) {
       require(['hbs!../templates/searchedMovies'], function(movieTemplate) {
-      $("#movieDataPanel").html("");
-      $("#movieDataPanel").prepend(movieTemplate(movieArray));
+        
+        $("#movieDataPanel").prepend(movieTemplate(movieArray));
       });
     }
+    
+
   return {
 
 

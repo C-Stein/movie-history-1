@@ -20,11 +20,11 @@ requirejs(["jquery", "lodash", "firebase", "hbs", "bootstrap", "dom-access", "de
   var searchResults;
   var outputContainer = dom.getOutputElement();
   var myFirebaseRef = new Firebase("https://moviehistoryrefactor.firebaseio.com/");
+    var storedMovieData = [];
+		var poster;
   myFirebaseRef.child("movie").on("value", function(snapshot) {
     var movies = snapshot.val();
     console.log("movies", movies);
-    var storedMovieData = [];
-		var poster;
 
     
     for (var obj in movies) {
@@ -54,7 +54,7 @@ requirejs(["jquery", "lodash", "firebase", "hbs", "bootstrap", "dom-access", "de
 
 
 
-
+    console.log("storedMovieData", storedMovieData);
 
 
 		// Add movie to firebase
@@ -83,9 +83,23 @@ requirejs(["jquery", "lodash", "firebase", "hbs", "bootstrap", "dom-access", "de
 	});
   
 
+function searchDisplayWishlistMovieData (movieArray) {
+      require(['hbs!../templates/movie-to-watch'], function(movieTemplate) {
+        console.log("searchDisplayMovieData called");
+        $("#movieDataPanel").append(movieTemplate(movieArray));
+      });
+    }
+function searchDisplayMovieData (movieArray) {
+      require(['hbs!../templates/movie-watched'], function(movieTemplate) {
+        console.log("searchDisplayWishlistMovieData called", movieArray);
+        $("#movieDataPanel").append(movieTemplate(movieArray));
+      });
+    }
+    console.log("storedMovieData", storedMovieData);
 	// Search API and firebase for Movie Titles -- calls getMovie function//
 	$("#searchButton").click(function(){
 		console.log("search button clicked");
+    $("#movieDataPanel").html("");
     
     //search api for multiple results
 		var title = $("#searchBox").val();
@@ -101,20 +115,30 @@ requirejs(["jquery", "lodash", "firebase", "hbs", "bootstrap", "dom-access", "de
         },
         success: function(data) {
           
-          console.log("data from getMovie function", data);
           searchResults = data;
-          console.log("searchResults from getMain", searchResults);
+          console.log("searchResults", searchResults);
          posters.getPosters(searchResults.Search);
         } 
       });
-    }
-    getMovie(title);
-  console.log("imdb Array?", searchResults);
-  
-
-    //re-search api to get posters for original results
 
     //search firebase
+      console.log ("storedMovieData", storedMovieData);
+      var searchedMovies = _.filter(storedMovieData, {'Title': title});
+      console.log("searchedMovies", searchedMovies);
+
+      var nonAPIWishlistMovies = _.filter(storedMovieData, { 'Title': title,
+                                                             'viewed': false });
+      console.log("nonAPIWatchedMovies", nonAPIWishlistMovies);
+      var nonAPIWatchedMovies = _.filter(storedMovieData, { 'Title': title,
+                                                             'viewed': true });
+      searchDisplayMovieData(nonAPIWatchedMovies);
+      searchDisplayWishlistMovieData(nonAPIWishlistMovies);
+    }
+    getMovie(title);
+ 
+  
+
+
 
 
   });
