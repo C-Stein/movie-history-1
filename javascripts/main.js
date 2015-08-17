@@ -95,6 +95,9 @@ function searchDisplayMovieData (movieArray) {
         $("#movieDataPanel").append(movieTemplate(movieArray));
       });
     }
+  function toTitleCase(str) {
+    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+  }
     console.log("storedMovieData", storedMovieData);
 	// Search API and firebase for Movie Titles -- calls getMovie function//
 	$("#searchButton").click(function(){
@@ -122,9 +125,10 @@ function searchDisplayMovieData (movieArray) {
       });
 
     //search firebase
-      console.log ("storedMovieData", storedMovieData);
-      var searchedMovies = _.filter(storedMovieData, {'Title': title});
-      console.log("searchedMovies", searchedMovies);
+      
+
+      title = toTitleCase(title);
+      console.log("title case title", title);
 
       var nonAPIWishlistMovies = _.filter(storedMovieData, { 'Title': title,
                                                              'viewed': false });
